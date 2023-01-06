@@ -22,7 +22,7 @@ app.post('/add', async (req, res) => {
   const body = await req.body;
   projectData = body;
   console.log(projectData);
-  res.status(200).send(projectData);
+  res.send(projectData);
 });
 
 

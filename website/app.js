@@ -6,7 +6,7 @@ const apiKey = ('&appid=07679a828834f0056854e606b1ff9695&units=imperial');
 const zipcode = document.querySelector('#zip');
 const feelings = document.querySelector('#feelings');
 const temp = document.querySelector('#temp');
-const name = document.querySelector('#name');
+const city = document.querySelector('#name');
 const button = document.querySelector('#generate');
 const feels_like = document.querySelector('#feels_like');
 const content = document.querySelector('#content');
@@ -21,6 +21,9 @@ button.addEventListener("click", (e) => {
       extractData(data)
         .then((info) => {
           postData('http://localhost:8000/add', info)
+            .then((data) => {
+              retrieveData("http://localhost:8000/all");
+            })
         })
     })
 });
@@ -52,7 +55,7 @@ const extractData = async (data) => {
 
     const content = {
       date: newDate,
-      name: data.name,
+      city: data.name,
       temp: data.main.temp,
       feels_like: data.main.feels_like,
       content: feelings.value,
@@ -67,19 +70,40 @@ const extractData = async (data) => {
 };
 
 const postData = async (url = '', data = {}) => {
-  
-    const response = await fetch(url, {
-      method: 'POST',
-      credentials: "same-origin",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data),
-    }); 
-    const result = await response.json();
-    console.log(result);
-    return result;
- 
+
+  const response = await fetch(url, {
+    method: 'POST',
+    credentials: "same-origin",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data),
+  });
+  const result = await response.json();
+  console.log(result);
+  return result;
+
 };
+
+const retrieveData = async () => {
+  const request = await fetch('http://localhost:8000/all');
+  try {
+    // Transform into JSON
+    const allData = await request.json()
+    console.log(allData)
+    // Write updated data to DOM elements
+    city.innerHTML = `City: ${allData.city}`
+    temp.innerHTML = `Temperature: ${Math.round(allData.temp)} Degrees`;
+    content.innerHTML = allData.content;
+    feels_like.innerHTML = `Feels like: ${allData.feels_like}`;
+    weather.innerHTML = allData.weather;
+    document.getElementById("date").innerHTML = allData.date;
+
+  }
+  catch (error) {
+    console.log("error", error);
+    // appropriately handle the error
+  }
+}
 
 
