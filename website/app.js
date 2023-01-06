@@ -1,5 +1,5 @@
 let d = new Date();
-let newDate = d.getMonth() + '.' + d.getDate() + '.' + d.getFullYear();
+let newDate = d.getMonth()+1 + '.' + d.getDate() + '.' + d.getFullYear();
 
 const baseURL = ('https://api.openweathermap.org/data/2.5/weather?zip=');
 const apiKey = ('&appid=07679a828834f0056854e606b1ff9695&units=imperial');
