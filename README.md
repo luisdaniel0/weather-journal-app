@@ -4,6 +4,8 @@ Weather Journal Application where user enters a zip code and information is brou
  - HTML
  - CSS
  - JavaScript
+ - Node
+ - Express
 
 ## Process of Project and what I learned 
   - Created and set up a node environtment with Express and necessary project dependancies (cors,bodyParser)
