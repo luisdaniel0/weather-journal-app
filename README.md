@@ -8,7 +8,7 @@ Weather Journal Application where user enters a zip code and information is brou
  - Express
 
 ## Process of Project and what I learned 
-  - Created and set up a node environtment with Express and necessary project dependancies (cors,bodyParser)
+  - Created and set up a node environment with Express and necessary project dependancies (cors,bodyParser)
   - Created a server with GET and POST routes
   - Accessed 3rd party Weather API: https://openweathermap.org/api
   - Used FETCH with my credentials and user input to get dynamic data into my app routes
