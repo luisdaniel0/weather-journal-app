@@ -35,11 +35,11 @@ const fetchAPI = async (urlApi) => {
     const res = await fetch(urlApi);
     const data = await res.json();
     if (data.id != 0) {
-      console.log(data)
+      
       return data;
 
     }
-    console.log(data);
+    
     return data;
   } catch (error) {
     console.log(error.message);
@@ -49,7 +49,7 @@ const fetchAPI = async (urlApi) => {
 const extractData = async (data) => {
   try {
     if (data.id != 0) {
-      console.log(data);
+      
       return data;
     }
 
@@ -61,7 +61,7 @@ const extractData = async (data) => {
       content: feelings.value,
       weather: data.weather[0].main
     };
-    console.log(content);
+    
     return content;
 
   } catch (error) {
@@ -80,7 +80,6 @@ const postData = async (url = '', data = {}) => {
     body: JSON.stringify(data),
   });
   const result = await response.json();
-  console.log(result);
   return result;
 
 };
@@ -90,14 +89,13 @@ const retrieveData = async () => {
   try {
     // Transform into JSON
     const allData = await request.json()
-    console.log(allData)
     // Write updated data to DOM elements
     city.innerHTML = `City: ${allData.city}`
     temp.innerHTML = `Temperature: ${Math.round(allData.temp)} Degrees`;
     content.innerHTML = allData.content;
     feels_like.innerHTML = `Feels like: ${allData.feels_like}`;
     weather.innerHTML = allData.weather;
-    document.getElementById("date").innerHTML = allData.date;
+    document.getElementById("date").innerHTML = `<br> ${allData.date}`;
 
   }
   catch (error) {
